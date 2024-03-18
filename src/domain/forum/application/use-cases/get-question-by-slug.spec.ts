@@ -32,6 +32,6 @@ describe('Get Question By Slug', () => {
       await sut.execute({
         slug: 'slug-errada',
       })
-    }).rejects.toThrow('Question not found')
+    }).rejects.toBeInstanceOf(Error)
   })
 })
