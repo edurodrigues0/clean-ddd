@@ -15,6 +15,10 @@ export class AnswerComment extends Entity<AnswerCommentProps> {
     return this.props.authorId
   }
 
+  get answerId() {
+    return this.props.answerId
+  }
+
   get content() {
     return this.props.content
   }
