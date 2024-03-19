@@ -1,3 +1,4 @@
+import { beforeEach } from 'vitest'
 import { CreateQuestionUseCase } from './create-question'
 import { InMemoryQuestionRepository } from 'test/repositories/in-memory-questions-repository'
 
