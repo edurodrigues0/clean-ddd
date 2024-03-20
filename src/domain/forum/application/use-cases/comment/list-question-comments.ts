@@ -1,14 +1,16 @@
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 import { QuestionsCommentsRepository } from '../../repositories/question-comments-repository'
+import { Either, right } from '@/core/either'
 
 interface ListQuestionCommentsUseCaseRequest {
   questionId: string
   page: number
 }
 
-interface ListQuestionCommentsUseCaseResponse {
-  questionComments: QuestionComment[]
-}
+type ListQuestionCommentsUseCaseResponse = Either<
+  null,
+  { questionComments: QuestionComment[] }
+>
 
 export class ListQuestionCommentsUseCase {
   constructor(
@@ -24,8 +26,8 @@ export class ListQuestionCommentsUseCase {
         page,
       })
 
-    return {
+    return right({
       questionComments,
-    }
+    })
   }
 }

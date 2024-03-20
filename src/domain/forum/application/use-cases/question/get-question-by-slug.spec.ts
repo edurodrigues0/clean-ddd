@@ -2,6 +2,7 @@ import { InMemoryQuestionRepository } from 'test/repositories/in-memory-question
 import { GetQuestionBySlugUseCase } from './get-question-by-slug'
 import { makeQuestion } from 'test/factories/make-question'
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'
+import { QuestionNotFoundError } from '../errors/question-not-found-error'
 
 let inMemoryQuestionsRepository: InMemoryQuestionRepository
 let sut: GetQuestionBySlugUseCase
@@ -19,19 +20,22 @@ describe('Get Question By Slug', () => {
 
     inMemoryQuestionsRepository.create(newQuestion)
 
-    const { question } = await sut.execute({
+    const result = await sut.execute({
       slug: 'slug-teste',
     })
 
-    expect(question.id).toBeTruthy()
-    expect(question.title).toEqual(newQuestion.title)
+    expect(result.isRight()).toBe(true)
+    expect(inMemoryQuestionsRepository.items[0]?.title).toEqual(
+      newQuestion.title,
+    )
   })
 
   it('not should be able to get a question with wrong slug', async () => {
-    await expect(async () => {
-      await sut.execute({
-        slug: 'slug-errada',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      slug: 'slug-errada',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(QuestionNotFoundError)
   })
 })

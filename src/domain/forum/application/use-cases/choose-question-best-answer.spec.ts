@@ -4,6 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryAnswerRepository } from 'test/repositories/in-memory-answers-repository'
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer'
 import { makeAnswer } from 'test/factories/make-answer'
+import { NotAllowedError } from './errors/not-allowed-error'
 
 let inMemoryQuestionsRepository: InMemoryQuestionRepository
 let inMemoryAnswersRepository: InMemoryAnswerRepository
@@ -50,11 +51,12 @@ describe('Choose Question Best Answer', () => {
     await inMemoryAnswersRepository.create(answer)
     await inMemoryQuestionsRepository.create(question)
 
-    expect(() => {
-      return sut.execute({
-        answerId: answer.id.toString(),
-        authorId: 'author-02',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      answerId: answer.id.toString(),
+      authorId: 'author-02',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })
