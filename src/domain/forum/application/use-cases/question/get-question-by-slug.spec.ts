@@ -2,7 +2,7 @@ import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'
 import { makeQuestion } from 'test/factories/make-question'
 
 import { GetQuestionBySlugUseCase } from './get-question-by-slug'
-import { QuestionNotFoundError } from '../errors/question-not-found-error'
+import { QuestionNotFoundError } from '@/core/errors/errors/question-not-found-error'
 
 import { InMemoryQuestionRepository } from 'test/repositories/in-memory-questions-repository'
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'

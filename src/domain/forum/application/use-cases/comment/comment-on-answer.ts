@@ -3,7 +3,7 @@ import { AnswersRepository } from '../../repositories/answers-repository'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
 import { AnswersCommentsRepository } from '../../repositories/answer-comments-repository'
 import { Either, left, right } from '@/core/either'
-import { AnswerNotFoundError } from '../errors/answer-not-found-error'
+import { AnswerNotFoundError } from '@/core/errors/errors/answer-not-found-error'
 
 interface CommentOnAnswerUseCaseRequest {
   authorId: string
