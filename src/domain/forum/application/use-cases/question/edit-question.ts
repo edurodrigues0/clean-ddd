@@ -4,9 +4,9 @@ import { Either, left, right } from '@/core/either'
 import { QuestionNotFoundError } from '../errors/question-not-found-error'
 import { NotAllowedError } from '../errors/not-allowed-error'
 import { QuestionAttachmentsRepository } from '../../repositories/question-attachments-repository'
-import { QuestionAttachmentList } from '@/domain/forum/enterprise/question-attachment-list'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/question-attachment-list'
 
 interface EditQuestionUseCaseRequest {
   authorId: string

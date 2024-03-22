@@ -53,7 +53,7 @@ export class InMemoryQuestionRepository implements QuestionsRepository {
 
     this.items.splice(itemIndex, 1)
 
-    this.questionAttachmentsRepository.deleteManyByQuestionIdq(
+    this.questionAttachmentsRepository.deleteManyByQuestionId(
       question.id.toString(),
     )
   }
